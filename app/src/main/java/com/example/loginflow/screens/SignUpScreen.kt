@@ -15,9 +15,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.loginflow.R
+import com.example.loginflow.components.ButtonComponent
+import com.example.loginflow.components.CheckboxComponent
+import com.example.loginflow.components.ClickableLoginTextComponent
+import com.example.loginflow.components.DividerTextComponent
 import com.example.loginflow.components.HeadingTextComponent
 import com.example.loginflow.components.MyTextFieldComponent
 import com.example.loginflow.components.NormalTextComponent
+import com.example.loginflow.components.PasswordTextFieldComponent
+import com.example.loginflow.navigation.PostOfficeAppRouter
+import com.example.loginflow.navigation.Screen
 
 @Composable
 fun SignUpScreen () {
@@ -41,9 +48,25 @@ fun SignUpScreen () {
             MyTextFieldComponent(labelValue = stringResource(id = R.string.email),
                     painterResource = painterResource(id = R.drawable.message)
             )
-            MyTextFieldComponent(labelValue = stringResource(id = R.string.password),
-                painterResource = painterResource(id = R.drawable.ic_lock)
-            )
+           PasswordTextFieldComponent(labelValue = stringResource(id = R.string.password),
+              painterResource = painterResource(id = R.drawable.lock)
+           )
+
+          CheckboxComponent(value = stringResource(id = R.string.terms_and_conditions),
+          onTextSelected ={
+            PostOfficeAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
+          })
+            Spacer(modifier = Modifier.height(40.dp))
+
+            ButtonComponent(value = stringResource(id = R.string.register))
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            DividerTextComponent()
+
+            ClickableLoginTextComponent( tryingToLogin = true, onTextSelected = {
+                PostOfficeAppRouter.navigateTo(Screen.LoginScreen)
+            } )
         }
 
     }
